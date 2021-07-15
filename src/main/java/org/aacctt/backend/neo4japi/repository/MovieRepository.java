@@ -1,9 +1,10 @@
 package org.aacctt.backend.neo4japi.repository;
 
 import org.aacctt.backend.neo4japi.entity.MovieEntity;
-import org.springframework.data.neo4j.repository.ReactiveNeo4jRepository;
-import reactor.core.publisher.Mono;
+import org.springframework.data.neo4j.repository.Neo4jRepository;
+import org.springframework.stereotype.Repository;
 
-public interface MovieRepository extends ReactiveNeo4jRepository<MovieEntity, String> {
-    Mono<MovieEntity> findOneByTitle(String title);
+@Repository
+public interface MovieRepository extends Neo4jRepository<MovieEntity, String> {
+    MovieEntity findOneByTitle(String title);
 }
