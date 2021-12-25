@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+
 @RestController
 @RequestMapping("/movies")
 public class MovieController {
@@ -43,4 +44,16 @@ public class MovieController {
     public Greeting sayHello(@RequestParam(name="name", required=false, defaultValue="Stranger") String name) {
         return new Greeting(1, String.format("Hello, %s!", name));
     }
+
+    @GetMapping(value={"/last100"}, produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    Flux<MovieEntity> getLast100Movies() {
+        return movieRepository.last100();
+    }
+
+    @GetMapping(value={"/tomH"}, produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    Flux<MovieEntity> getTomHMovies() {
+        return movieRepository.tomHMovies();
+    }
+
+
 }
